@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { getTableData } from './model/get_data'
+import { getTableData } from './model/get_data.js'
 
 const emails = await getTableData('public','recipients');
 console.log(emails);
