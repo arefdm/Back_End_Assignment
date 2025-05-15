@@ -1,11 +1,12 @@
-import { POSTGRES_SECRETS } from "../config";
+import { POSTGRES_SECRETS } from "../config.js";
 import {Client} from 'pg';
 
-const client = new Client(POSTGRES_SECRETS);
+
 
 export async function query(sqlQuery,variables){
+    const client = new Client(POSTGRES_SECRETS);
     await client.connect();
     const res = await client.query(sqlQuery,variables);
     await client.end();
-    return res;
+    return res.rows;
 };
