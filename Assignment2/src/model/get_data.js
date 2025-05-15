@@ -1,4 +1,4 @@
-import { query } from "../database/postgres_handler";
+import { query } from "../database/postgres_handler.js";
 
 export async function getTableData(tableSchema,tableName){
     const sqlQuery = `select *
