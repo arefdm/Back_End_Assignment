@@ -10,4 +10,4 @@ const rss = await Promise.all(rssUrl.map(async (rss) =>{
 const rssHtml = rss.join('');
 const recipients = await getTableData('public','recipients');
 const recipientEmails = recipients.map(recipient => recipient.email);
-const sendingEmail = emailSender(recipientEmails,rssHtml);
+const sendingEmail = await emailSender(recipientEmails,rssHtml);
