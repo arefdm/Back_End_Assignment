@@ -1,12 +1,13 @@
 import 'dotenv/config'
-import { getTableData } from './model/get_data.js'
-import { rssReader } from './rss_reader/rssReader.js'
+import { getTableData } from './model/get_data.js';
+import { rssReader } from './rss_reader/rssReader.js';
+import { emailSender } from './email/email_sender.js';
 
-// const emails = await getTableData('public','recipients');
-// console.log(emails);
 const rssUrl = await getTableData('public', 'rss_feeds');
-console.log(rssUrl);
-const rssHtml = await Promise.all(rssUrl.map(async (rss) =>{
+const rss = await Promise.all(rssUrl.map(async (rss) =>{
     return await rssReader(rss.rss_url);
 }));
-console.log(rssHtml.join(''));
+const rssHtml = rss.join('');
+const recipients = await getTableData('public','recipients');
+const recipientEmails = recipients.map(recipient => recipient.email);
+const sendingEmail = emailSender(recipientEmails,rssHtml);
