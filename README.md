@@ -1,4 +1,4 @@
-<p>To run application install depencency with npm i command</p>
+<p>To run application:</p>
 <ul>
 <li> Install depencency with npm i command</li>
 <li> change .env.sample name to .env </li>
