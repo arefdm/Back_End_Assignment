@@ -48,7 +48,25 @@ app.post('/api/calculate', (req,res) =>{
         default:
             break;
     }
-})
+});
+
+app.get('/api/fibonacci', (req,res)=>{
+    const n = req.query.n;
+    let result = [0];
+    const fibonacci = (n) => {
+        for (let i = 2; i <= n; i++) {
+            if (i === 2) {
+                result.push(1);
+            }else{
+                result.push(result[i-2]+result[i-3]);
+            };
+            
+        };
+      
+    };
+    fibonacci(n);
+    res.json({'result' : result})
+});
 
 app.listen(port, ()=> {
     console.log(`Server running at http://localhost:${port}`);
