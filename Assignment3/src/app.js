@@ -45,6 +45,12 @@ app.post('/api/calculate', (req,res) =>{
     let{a,b,operation} = req.body;
     a = Number(a);
     b = Number(b);
+    if (!a || !b || Number.isNaN(a) || Number.isNaN(b) ) {
+        res.status(400).send({message: 'Your input numbers are not correct'})
+    };
+    if (!operation || (operation !== "add" && operation !== "subtract" && operation !== "multiply" && operation !== "divide")){
+        res.status(400).send({message: "Operation is not correct"});
+    }
     switch (operation) {
         case "add":
             res.json({result : a+b})
