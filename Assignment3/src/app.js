@@ -72,9 +72,13 @@ app.post('/api/calculate', (req,res) =>{
 
 app.get('/api/fibonacci', (req,res)=>{
     const n = req.query.n;
+    const round = Number(n);
+    if(!round || Number.isNaN(round) || !Number.isInteger(round) || round <= 0 ){
+        res.status(400).send({message:"The input is not correct"});
+    };
     let result = [0];
-    const fibonacci = (n) => {
-        for (let i = 2; i <= n; i++) {
+    const fibonacci = (round) => {
+        for (let i = 2; i <= round; i++) {
             if (i === 2) {
                 result.push(1);
             }else{
@@ -84,7 +88,7 @@ app.get('/api/fibonacci', (req,res)=>{
         };
       
     };
-    fibonacci(n);
+    fibonacci(round);
     res.json({'result' : result})
 });
 
