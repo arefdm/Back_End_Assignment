@@ -9,7 +9,11 @@ app.get('/api/sum', (req,res)=>{
     const a = req.query.a;
     const b = req.query.b;
     const sum = Number(a)+Number(b);
-    res.json({result:sum});
+
+    if (Number.isNaN(sum) ) {
+        res.status(400).send({message: 'Your input numbers are incorrect'})
+    };
+    res.send({result:sum});
 });
 
 
